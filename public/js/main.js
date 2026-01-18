@@ -1,4 +1,7 @@
 // SnipShare main JavaScript file
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('SnipShare loaded');
+    // Initialize syntax highlighting
+    if (typeof hljs !== 'undefined') {
+        hljs.highlightAll();
+    }
 });
