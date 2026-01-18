@@ -300,6 +300,12 @@ main {
     color: var(--text-muted);
 }
 
+/* Copy button states */
+.btn.copied {
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .hero h1 {
