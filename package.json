@@ -1,0 +1,27 @@
+{
+  "name": "snipshare",
+  "version": "0.1.0",
+  "description": "A minimalist, open-source code snippet sharing platform",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [
+    "pastebin",
+    "snippet",
+    "code-sharing",
+    "open-source"
+  ],
+  "author": "Dreekos",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "ejs": "^3.1.9",
+    "better-sqlite3": "^9.2.2",
+    "nanoid": "^3.3.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
