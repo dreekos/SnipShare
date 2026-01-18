@@ -1,0 +1,27 @@
+<%- include('partials/header') %>
+
+<div class="stats-page">
+    <h1>Statistics</h1>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value"><%= stats.total %></div>
+            <div class="stat-label">Total Snippets</div>
+        </div>
+    </div>
+
+    <div class="stats-info">
+        <h2>About SnipShare</h2>
+        <p>SnipShare is an open-source code snippet sharing platform. We respect your privacy and don't track users.</p>
+
+        <h3>API Access</h3>
+        <p>Want to integrate with SnipShare? Check out our simple API:</p>
+        <ul>
+            <li><code>POST /api/snippets</code> - Create a new snippet</li>
+            <li><code>GET /api/snippets/:id</code> - Retrieve a snippet</li>
+            <li><code>GET /api/stats</code> - Get statistics</li>
+        </ul>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

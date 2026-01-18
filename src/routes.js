@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { nanoid } = require('nanoid');
-const { createSnippet, getSnippet, incrementViews } = require('./database');
+const { createSnippet, getSnippet, incrementViews, getSnippetCount } = require('./database');
 
 // Home page
 router.get('/', (req, res) => {
@@ -107,6 +107,23 @@ router.get('/about', (req, res) => {
     res.render('about', {
         title: 'About - SnipShare'
     });
+});
+
+// Statistics page
+router.get('/stats', (req, res) => {
+    try {
+        const total = getSnippetCount();
+        res.render('stats', {
+            title: 'Statistics - SnipShare',
+            stats: { total }
+        });
+    } catch (error) {
+        console.error('Error fetching stats:', error);
+        res.render('stats', {
+            title: 'Statistics - SnipShare',
+            stats: { total: 0 }
+        });
+    }
 });
 
 module.exports = router;
