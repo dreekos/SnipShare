@@ -1,4 +1,7 @@
 // SnipShare main JavaScript file
+console.log('%c SnipShare v1.0.0 ', 'background: #6366f1; color: white; padding: 2px 6px; border-radius: 4px;');
+console.log('Contribute: github.com/dreekos/SnipShare');
+
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize syntax highlighting
     if (typeof hljs !== 'undefined') {
