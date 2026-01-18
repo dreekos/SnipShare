@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  snipshare:
+    build: .
+    container_name: snipshare
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - DATABASE_PATH=/app/data/snipshare.db
+      - RATE_LIMIT_WINDOW=900000
+      - RATE_LIMIT_MAX=100
+    volumes:
+      - snipshare_data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  snipshare_data:
+    driver: local
