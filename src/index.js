@@ -1,9 +1,13 @@
 const express = require('express');
 const path = require('path');
 const routes = require('./routes');
+const { initDatabase } = require('./database');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Initialize database
+initDatabase();
 
 // Middleware
 app.use(express.json());
