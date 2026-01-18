@@ -403,6 +403,25 @@ main {
     color: var(--text-muted);
 }
 
+.footer-links {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.footer-links .separator {
+    margin: 0 0.5rem;
+    color: var(--border-color);
+}
+
+.footer-links a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
 /* Copy button states */
 .btn.copied {
     background-color: var(--success-color);
