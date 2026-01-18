@@ -1,6 +1,6 @@
 {
   "name": "snipshare",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A minimalist, open-source code snippet sharing platform",
   "main": "src/index.js",
   "scripts": {
