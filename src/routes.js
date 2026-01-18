@@ -17,18 +17,38 @@ router.get('/new', (req, res) => {
     });
 });
 
+// Calculate expiration date
+function calculateExpiration(expiration) {
+    if (!expiration || expiration === 'never') return null;
+
+    const now = new Date();
+    switch (expiration) {
+        case '1h':
+            return new Date(now.getTime() + 60 * 60 * 1000).toISOString();
+        case '24h':
+            return new Date(now.getTime() + 24 * 60 * 60 * 1000).toISOString();
+        case '7d':
+            return new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000).toISOString();
+        case '30d':
+            return new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000).toISOString();
+        default:
+            return null;
+    }
+}
+
 // Handle snippet creation
 router.post('/api/snippets', (req, res) => {
-    const { title, content, language } = req.body;
+    const { title, content, language, expiration } = req.body;
 
     if (!content || content.trim() === '') {
         return res.status(400).json({ error: 'Content is required' });
     }
 
     const id = nanoid(8);
+    const expiresAt = calculateExpiration(expiration);
 
     try {
-        createSnippet(id, title || 'Untitled', content, language || 'plaintext');
+        createSnippet(id, title || 'Untitled', content, language || 'plaintext', expiresAt);
         res.redirect(`/s/${id}`);
     } catch (error) {
         console.error('Error creating snippet:', error);
