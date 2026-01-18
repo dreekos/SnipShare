@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const routes = require('./routes');
 const { initDatabase } = require('./database');
+const rateLimiter = require('./middleware/rateLimit');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,6 +14,9 @@ initDatabase();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../public')));
+
+// Rate limiting for API routes
+app.use('/api', rateLimiter);
 
 // View engine
 app.set('view engine', 'ejs');
