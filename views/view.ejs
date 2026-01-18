@@ -1,0 +1,28 @@
+<%- include('partials/header') %>
+
+<div class="snippet-view">
+    <% if (snippet) { %>
+        <div class="snippet-header">
+            <h2><%= snippet.title || 'Untitled Snippet' %></h2>
+            <span class="language-badge"><%= snippet.language %></span>
+        </div>
+        <div class="snippet-meta">
+            <span>Created: <%= new Date(snippet.created_at).toLocaleDateString() %></span>
+        </div>
+        <div class="code-container">
+            <pre><code class="language-<%= snippet.language %>"><%= snippet.content %></code></pre>
+        </div>
+        <div class="snippet-actions">
+            <button class="btn btn-secondary" id="copyBtn">Copy Code</button>
+            <a href="/s/<%= snippet.id %>/raw" class="btn btn-secondary">Raw</a>
+        </div>
+    <% } else { %>
+        <div class="error-message">
+            <h2>Snippet Not Found</h2>
+            <p>The snippet you're looking for doesn't exist or has expired.</p>
+            <a href="/" class="btn btn-primary">Go Home</a>
+        </div>
+    <% } %>
+</div>
+
+<%- include('partials/footer') %>
