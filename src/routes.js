@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { nanoid } = require('nanoid');
-const { createSnippet, getSnippet } = require('./database');
+const { createSnippet, getSnippet, incrementViews } = require('./database');
 
 // Home page
 router.get('/', (req, res) => {
@@ -36,12 +36,50 @@ router.post('/api/snippets', (req, res) => {
     }
 });
 
-// View snippet (placeholder)
+// View snippet
 router.get('/s/:id', (req, res) => {
-    res.render('view', {
-        title: 'View Snippet - SnipShare',
-        snippet: null
-    });
+    const { id } = req.params;
+
+    try {
+        const snippet = getSnippet(id);
+
+        if (snippet) {
+            incrementViews(id);
+            res.render('view', {
+                title: `${snippet.title} - SnipShare`,
+                snippet
+            });
+        } else {
+            res.render('view', {
+                title: 'Not Found - SnipShare',
+                snippet: null
+            });
+        }
+    } catch (error) {
+        console.error('Error fetching snippet:', error);
+        res.render('view', {
+            title: 'Error - SnipShare',
+            snippet: null
+        });
+    }
+});
+
+// Get raw snippet content
+router.get('/s/:id/raw', (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const snippet = getSnippet(id);
+
+        if (snippet) {
+            res.type('text/plain').send(snippet.content);
+        } else {
+            res.status(404).send('Snippet not found');
+        }
+    } catch (error) {
+        console.error('Error fetching raw snippet:', error);
+        res.status(500).send('Error fetching snippet');
+    }
 });
 
 // About page
