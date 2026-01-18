@@ -8,6 +8,9 @@ const rateLimiter = require('./middleware/rateLimit');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Trust proxy for proper IP detection behind reverse proxies
+app.set('trust proxy', 1);
+
 // Initialize database
 initDatabase();
 
