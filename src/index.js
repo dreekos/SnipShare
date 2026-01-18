@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const routes = require('./routes');
+const apiRoutes = require('./api');
 const { initDatabase } = require('./database');
 const rateLimiter = require('./middleware/rateLimit');
 
@@ -24,6 +25,7 @@ app.set('views', path.join(__dirname, '../views'));
 
 // Routes
 app.use('/', routes);
+app.use('/api', apiRoutes);
 
 // Start server
 app.listen(PORT, () => {
