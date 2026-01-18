@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const routes = require('./routes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,10 +14,8 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '../views'));
 
-// Basic route
-app.get('/', (req, res) => {
-    res.send('SnipShare - Coming Soon!');
-});
+// Routes
+app.use('/', routes);
 
 // Start server
 app.listen(PORT, () => {
